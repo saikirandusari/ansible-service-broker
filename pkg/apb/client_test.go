@@ -26,7 +26,7 @@ func TestCreateExtraVarsNilParameters(t *testing.T) {
 	parameters := Parameters(nil)
 
 	t.Log("calling createExtraVars")
-	value, err := createExtraVars(&context, &parameters)
+	value, err := createExtraVars(&context, parameters)
 	if err != nil {
 		t.Log("we have an error")
 		t.Fatal(err)
@@ -38,7 +38,7 @@ func TestCreateExtraVarsNilParameters(t *testing.T) {
 }
 
 func TestCreateExtraVarsNilContextRef(t *testing.T) {
-	parameters := &Parameters{"key": "param"}
+	parameters := Parameters{"key": "param"}
 
 	t.Log("calling createExtraVars")
 	value, err := createExtraVars(nil, parameters)
@@ -54,7 +54,7 @@ func TestCreateExtraVarsNilContextRef(t *testing.T) {
 
 func TestCreateExtraVars(t *testing.T) {
 	context := &Context{Platform: "kubernetes", Namespace: "testing-project"}
-	parameters := &Parameters{"key": "param"}
+	parameters := Parameters{"key": "param"}
 	value, err := createExtraVars(context, parameters)
 	if err != nil {
 		t.Log("we have an error")

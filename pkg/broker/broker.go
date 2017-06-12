@@ -214,7 +214,7 @@ func (a AnsibleBroker) Provision(instanceUUID uuid.UUID, req *ProvisionRequest, 
 	}
 
 	context := &req.Context
-	parameters := &req.Parameters
+	parameters := req.Parameters
 
 	// Build and persist record of service instance
 	serviceInstance := &apb.ServiceInstance{
@@ -367,7 +367,7 @@ func (a AnsibleBroker) Bind(instanceUUID uuid.UUID, bindingUUID uuid.UUID, req *
 	// asbcli passes in user: aone, which bind passes to apb
 	params := make(apb.Parameters)
 	if instance.Parameters != nil {
-		params["provision_params"] = *instance.Parameters
+		params["provision_params"] = instance.Parameters
 	}
 	params["bind_params"] = req.Parameters
 
@@ -378,7 +378,7 @@ func (a AnsibleBroker) Bind(instanceUUID uuid.UUID, bindingUUID uuid.UUID, req *
 	bindingInstance := &apb.BindInstance{
 		Id:         bindingUUID,
 		ServiceId:  instanceUUID,
-		Parameters: &params,
+		Parameters: params,
 	}
 
 	// Verify we're not rebinding the same instance. if err is nil, there is an
@@ -430,7 +430,7 @@ func (a AnsibleBroker) Bind(instanceUUID uuid.UUID, bindingUUID uuid.UUID, req *
 		a.log.Debug("%+v", provExtCreds)
 	}
 
-	bindExtCreds, err := apb.Bind(instance, &params, a.clusterConfig, a.log)
+	bindExtCreds, err := apb.Bind(instance, params, a.clusterConfig, a.log)
 	if err != nil {
 		return nil, err
 	}

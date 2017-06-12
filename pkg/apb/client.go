@@ -112,7 +112,7 @@ func (c *Client) RunImage(
 	clusterConfig ClusterConfig,
 	spec *Spec,
 	context *Context,
-	p *Parameters,
+	p Parameters,
 ) ([]byte, error) {
 	// HACK: We're expecting to run containers via go APIs rather than cli cmds
 	// TODO: Expecting parameters to be passed here in the future as well
@@ -232,17 +232,14 @@ func OcLogin(log *logging.Logger, args ...string) error {
 // TODO: Instead of putting namespace directly as a parameter, we should create a dictionary
 // of apb_metadata and put context and other variables in it so we don't pollute the user
 // parameter space.
-func createExtraVars(context *Context, parameters *Parameters) (string, error) {
-	var paramsCopy Parameters
-	if parameters != nil && *parameters != nil {
-		paramsCopy = *parameters
-	} else {
-		paramsCopy = make(Parameters)
+func createExtraVars(context *Context, parameters Parameters) (string, error) {
+	if parameters == nil {
+		parameters = make(Parameters)
 	}
 
 	if context != nil {
-		paramsCopy["namespace"] = context.Namespace
+		parameters["namespace"] = context.Namespace
 	}
-	extraVars, err := json.Marshal(paramsCopy)
+	extraVars, err := json.Marshal(parameters)
 	return string(extraVars), err
 }

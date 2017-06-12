@@ -12,7 +12,7 @@ type ProvisionJob struct {
 	instanceuuid  uuid.UUID
 	spec          *apb.Spec
 	context       *apb.Context
-	parameters    *apb.Parameters
+	parameters    apb.Parameters
 	clusterConfig apb.ClusterConfig
 	log           *logging.Logger
 }
@@ -32,7 +32,7 @@ func (m ProvisionMsg) Render() string {
 
 func NewProvisionJob(
 	instanceuuid uuid.UUID, spec *apb.Spec, context *apb.Context,
-	parameters *apb.Parameters, clusterConfig apb.ClusterConfig,
+	parameters apb.Parameters, clusterConfig apb.ClusterConfig,
 	log *logging.Logger,
 ) *ProvisionJob {
 	return &ProvisionJob{

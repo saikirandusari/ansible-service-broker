@@ -11,7 +11,7 @@ import (
 // Little looser, but still not great
 func Bind(
 	instance *ServiceInstance,
-	parameters *Parameters,
+	parameters Parameters,
 	clusterConfig ClusterConfig, log *logging.Logger,
 ) (*ExtractedCredentials, error) {
 	log.Notice("============================================================")

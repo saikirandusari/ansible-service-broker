@@ -115,16 +115,16 @@ func NewSpecManifest(specs []*Spec) SpecManifest {
 }
 
 type ServiceInstance struct {
-	Id         uuid.UUID   `json:"id"`
-	Spec       *Spec       `json:"spec"`
-	Context    *Context    `json:"context"`
-	Parameters *Parameters `json:"parameters"`
+	Id         uuid.UUID  `json:"id"`
+	Spec       *Spec      `json:"spec"`
+	Context    *Context   `json:"context"`
+	Parameters Parameters `json:"parameters"`
 }
 
 type BindInstance struct {
-	Id         uuid.UUID   `json:"id"`
-	ServiceId  uuid.UUID   `json:"service_id"`
-	Parameters *Parameters `json:"parameters"`
+	Id         uuid.UUID  `json:"id"`
+	ServiceId  uuid.UUID  `json:"service_id"`
+	Parameters Parameters `json:"parameters"`
 }
 
 func LoadJSON(payload string, obj interface{}) error {

@@ -13,7 +13,7 @@ import (
 // Maybe apb defines its own interface and accepts that optionally
 // Little looser, but still not great
 func Provision(
-	spec *Spec, context *Context, parameters *Parameters,
+	spec *Spec, context *Context, parameters Parameters,
 	clusterConfig ClusterConfig, log *logging.Logger,
 ) (*ExtractedCredentials, error) {
 	log.Notice("============================================================")
