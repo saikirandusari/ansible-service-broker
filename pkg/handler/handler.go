@@ -29,8 +29,21 @@ type handler struct {
 	brokerConfig broker.Config
 }
 
+/*
+DO I MAKE IT A STRUCT?
 type AuthHandler struct {
 	wrappedHandler http.Handler
+}
+*/
+
+/*
+Do I make it a function?
+*/
+func AuthHandler(h http.Handler, providers string) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		h.ServeHTTP(w, r)
+		return
+	})
 }
 
 /*
